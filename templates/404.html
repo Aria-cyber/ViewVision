@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}صفحه یافت نشد - ViewVision{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="empty-state" style="padding: 8rem 0;">
+        <div class="empty-state-icon" style="font-size: 6rem; color: var(--accent);">404</div>
+        <h3>صفحه مورد نظر یافت نشد</h3>
+        <p>صفحه‌ای که دنبال آن هستید وجود ندارد یا حذف شده است.</p>
+        <div style="display:flex;gap:var(--space-md);justify-content:center;flex-wrap:wrap;margin-top:var(--space-lg);">
+            <a href="{% url 'home' %}" class="btn btn-primary">
+                <i class="fas fa-home"></i> بازگشت به خانه
+            </a>
+            <a href="{% url 'search' %}" class="btn btn-outline">
+                <i class="fas fa-search"></i> جستجو
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block title %}پروفایل - ViewVision{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="profile-container">
+        <div class="page-header">
+            <h1>پروفایل کاربری</h1>
+        </div>
+
+        <div class="profile-header">
+            <div class="profile-avatar">
+                {% if user.avatar %}
+                <img src="{{ user.avatar.url }}" alt="{{ user.username }}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">
+                {% else %}
+                {{ user.username|first|upper }}
+                {% endif %}
+            </div>
+            <div>
+                <h2 style="margin-bottom: 4px;">{{ user.username }}</h2>
+                <p class="text-muted">{{ user.email }}</p>
+                {% if user.bio %}
+                <p style="margin-top: 8px; color: var(--text-secondary);">{{ user.bio }}</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="profile-stats">
+            <div class="profile-stat">
+                <div class="profile-stat-number">{{ user.reviews.count }}</div>
+                <div class="profile-stat-label">نظرات</div>
+            </div>
+            <div class="profile-stat">
+                <div class="profile-stat-number">{{ user.watchlist_items.count }}</div>
+                <div class="profile-stat-label">لیست تماشا</div>
+            </div>
+        </div>
+
+        <div class="form-card">
+            <h3 style="margin-bottom: var(--space-lg); display: flex; align-items: center; gap: var(--space-sm);">
+                <i class="fas fa-edit" style="color: var(--accent);"></i> ویرایش پروفایل
+            </h3>
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% for field in form %}
+                <div class="form-group">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.errors %}
+                    <div class="text-accent" style="font-size: 0.8rem; margin-top: 4px;">
+                        {% for error in field.errors %}
+                        {{ error }}
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save"></i> ذخیره تغییرات
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

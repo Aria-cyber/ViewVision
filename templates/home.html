@@ -1,0 +1,264 @@
+{% extends 'base.html' %}
+{% load genre_tags %}
+
+{% block title %}ViewVision - خانه{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero">
+    <div class="container">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <i class="fas fa-clapperboard"></i>
+                پلتفرم جامع فیلم و سریال
+            </div>
+            <h1>
+                دنیای فیلم و سریال را با
+                <span class="highlight">ViewVision</span>
+                کشف کنید
+            </h1>
+            <p>
+                بهترین آثار سینمایی و تلویزیونی را مرور کنید، نظرات خود را بنویسید
+                و لیست تماشای شخصی خود را بسازید.
+            </p>
+            <div class="hero-actions">
+                <a href="{% url 'movies:movie_list' %}" class="btn btn-primary btn-lg">
+                    <i class="fas fa-film"></i> مشاهده فیلم‌ها
+                </a>
+                <a href="{% url 'series:series_list' %}" class="btn btn-outline btn-lg">
+                    <i class="fas fa-tv"></i> مشاهده سریال‌ها
+                </a>
+            </div>
+            <div class="stats-row">
+                <div class="stat-item">
+                    <div class="stat-number">{{ total_movies|add:total_series }}+</div>
+                    <div class="stat-label">عنوان</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">{{ total_genres }}+</div>
+                    <div class="stat-label">ژانر</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">۲۴/۷</div>
+                    <div class="stat-label">دسترسی آزاد</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Trending Movies -->
+{% if trending_movies %}
+<section class="section">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">
+                <i class="fas fa-fire"></i> فیلم‌های برتر
+            </h2>
+            <a href="{% url 'movies:movie_list' %}" class="section-link">
+                مشاهده همه <i class="fas fa-chevron-left"></i>
+            </a>
+        </div>
+        <div class="media-grid">
+            {% for movie in trending_movies %}
+            <a href="{{ movie.get_absolute_url }}" class="media-card">
+                <div class="media-card-poster">
+                    {% if movie.get_poster_url %}
+                    <img src="{{ movie.get_poster_url }}" alt="{{ movie.title }}">
+                    {% else %}
+                    <div class="poster-placeholder">
+                        <i class="fas fa-film"></i>
+                    </div>
+                    {% endif %}
+                    <div class="media-card-overlay">
+                        <div class="overlay-actions">
+                            <span class="btn btn-primary btn-sm">
+                                <i class="fas fa-play"></i> جزئیات
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="media-card-info">
+                    <div class="media-card-title">{{ movie.title }}</div>
+                    <div class="media-card-meta">
+                        <span class="media-card-rating">
+                            <i class="fas fa-star"></i> {{ movie.rating }}
+                        </span>
+                        <span class="media-card-year">{{ movie.release_date|date:"Y" }}</span>
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Trending Series -->
+{% if trending_series %}
+<section class="section">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">
+                <i class="fas fa-tv"></i> سریال‌های برتر
+            </h2>
+            <a href="{% url 'series:series_list' %}" class="section-link">
+                مشاهده همه <i class="fas fa-chevron-left"></i>
+            </a>
+        </div>
+        <div class="media-grid">
+            {% for series in trending_series %}
+            <a href="{{ series.get_absolute_url }}" class="media-card">
+                <div class="media-card-poster">
+                    {% if series.get_poster_url %}
+                    <img src="{{ series.get_poster_url }}" alt="{{ series.title }}">
+                    {% else %}
+                    <div class="poster-placeholder">
+                        <i class="fas fa-tv"></i>
+                    </div>
+                    {% endif %}
+                    <div class="media-card-overlay">
+                        <div class="overlay-actions">
+                            <span class="btn btn-primary btn-sm">
+                                <i class="fas fa-play"></i> جزئیات
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="media-card-info">
+                    <div class="media-card-title">{{ series.title }}</div>
+                    <div class="media-card-meta">
+                        <span class="media-card-rating">
+                            <i class="fas fa-star"></i> {{ series.rating }}
+                        </span>
+                        <span class="media-card-year">{{ series.release_date|date:"Y" }}</span>
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Recent Movies -->
+{% if recent_movies %}
+<section class="section">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">
+                <i class="fas fa-clock"></i> جدیدترین فیلم‌ها
+            </h2>
+            <a href="{% url 'movies:movie_list' %}" class="section-link">
+                مشاهده همه <i class="fas fa-chevron-left"></i>
+            </a>
+        </div>
+        <div class="media-grid">
+            {% for movie in recent_movies %}
+            <a href="{{ movie.get_absolute_url }}" class="media-card">
+                <div class="media-card-poster">
+                    {% if movie.get_poster_url %}
+                    <img src="{{ movie.get_poster_url }}" alt="{{ movie.title }}">
+                    {% else %}
+                    <div class="poster-placeholder">
+                        <i class="fas fa-film"></i>
+                    </div>
+                    {% endif %}
+                    <div class="media-card-overlay">
+                        <div class="overlay-actions">
+                            <span class="btn btn-primary btn-sm">
+                                <i class="fas fa-play"></i> جزئیات
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="media-card-info">
+                    <div class="media-card-title">{{ movie.title }}</div>
+                    <div class="media-card-meta">
+                        <span class="media-card-rating">
+                            <i class="fas fa-star"></i> {{ movie.rating }}
+                        </span>
+                        <span class="media-card-year">{{ movie.release_date|date:"Y" }}</span>
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Recent Series -->
+{% if recent_series %}
+<section class="section">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">
+                <i class="fas fa-clock"></i> جدیدترین سریال‌ها
+            </h2>
+            <a href="{% url 'series:series_list' %}" class="section-link">
+                مشاهده همه <i class="fas fa-chevron-left"></i>
+            </a>
+        </div>
+        <div class="media-grid">
+            {% for series in recent_series %}
+            <a href="{{ series.get_absolute_url }}" class="media-card">
+                <div class="media-card-poster">
+                    {% if series.get_poster_url %}
+                    <img src="{{ series.get_poster_url }}" alt="{{ series.title }}">
+                    {% else %}
+                    <div class="poster-placeholder">
+                        <i class="fas fa-tv"></i>
+                    </div>
+                    {% endif %}
+                    <div class="media-card-overlay">
+                        <div class="overlay-actions">
+                            <span class="btn btn-primary btn-sm">
+                                <i class="fas fa-play"></i> جزئیات
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="media-card-info">
+                    <div class="media-card-title">{{ series.title }}</div>
+                    <div class="media-card-meta">
+                        <span class="media-card-rating">
+                            <i class="fas fa-star"></i> {{ series.rating }}
+                        </span>
+                        <span class="media-card-year">{{ series.release_date|date:"Y" }}</span>
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Genres -->
+{% if genres %}
+<section class="section">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">
+                <i class="fas fa-tags"></i> ژانرها
+            </h2>
+            <a href="{% url 'genre_list' %}" class="section-link">
+                مشاهده همه <i class="fas fa-chevron-left"></i>
+            </a>
+        </div>
+        <div class="genre-grid">
+            {% for genre in genres %}
+            <a href="{{ genre.get_absolute_url }}" class="genre-card">
+                <div class="genre-card-icon">
+                    <i class="{{ genre.slug|genre_icon }}"></i>
+                </div>
+                <h3>{{ genre.name }}</h3>
+                <p>{{ genre.description|truncatewords:8 }}</p>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,577 @@
+/* ============================================
+   ViewVision Admin - Dark Theme Overrides
+   Harmonises Jazzmin admin with ViewVision branding:
+   deep navy/charcoal backgrounds, neon-blue (#00d4ff) accents
+   ============================================ */
+
+:root,
+[data-bs-theme="dark"] {
+    --vv-bg-deepest:   #0a0a0f;
+    --vv-bg-deep:      #12121a;
+    --vv-bg-surface:   #1a1a2e;
+    --vv-bg-raised:    #1e1e3a;
+    --vv-border:       #2a2a40;
+    --vv-accent:       #00d4ff;
+    --vv-accent-hover: #00b8e6;
+    --vv-accent-glow:  rgba(0, 212, 255, 0.3);
+    --vv-accent-subtle:rgba(0, 212, 255, 0.1);
+    --vv-text:         #e8e8f0;
+    --vv-text-muted:   #a0a0b8;
+    --vv-neon-purple:  #7b2ff7;
+    --vv-font:         'Vazirmatn', 'Segoe UI', Tahoma, sans-serif;
+}
+
+/* ---- Global body / html ---- */
+body,
+.content-wrapper {
+    background-color: var(--vv-bg-deepest) !important;
+}
+
+body {
+    font-family: var(--vv-font);
+}
+
+/* ---- Top navbar ---- */
+.main-header.navbar {
+    background: var(--vv-bg-deep) !important;
+    border-bottom-color: var(--vv-border) !important;
+}
+.main-header.navbar .nav-link,
+.main-header.navbar .navbar-nav .nav-item .nav-link {
+    color: var(--vv-text-muted) !important;
+}
+.main-header.navbar .nav-link:hover,
+.main-header.navbar .navbar-nav .nav-item .nav-link:hover {
+    color: var(--vv-accent) !important;
+}
+
+/* ---- Brand area (top-left) ---- */
+.main-header .brand-link {
+    background: var(--vv-bg-deep) !important;
+    border-bottom-color: var(--vv-border) !important;
+}
+.main-header .brand-link .brand-image,
+.main-header .brand-link .brand-text {
+    color: var(--vv-text) !important;
+}
+
+/* ---- Sidebar ---- */
+.main-sidebar,
+.main-sidebar .sidebar {
+    background-color: var(--vv-bg-deep) !important;
+}
+
+.main-sidebar .sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link.active,
+.main-sidebar .nav-sidebar > .nav-item > .nav-link.active {
+    background-color: var(--vv-accent-subtle) !important;
+    color: var(--vv-accent) !important;
+}
+
+.main-sidebar .nav-sidebar .nav-link {
+    color: var(--vv-text-muted) !important;
+}
+.main-sidebar .nav-sidebar .nav-link:hover {
+    color: var(--vv-text) !important;
+    background-color: rgba(255, 255, 255, 0.04) !important;
+}
+.main-sidebar .nav-header {
+    color: var(--vv-text-muted) !important;
+}
+
+/* ---- Content cards / boxes ---- */
+.card,
+.card-body,
+.card-header,
+.card-footer {
+    background-color: var(--vv-bg-surface) !important;
+    border-color: var(--vv-border) !important;
+    color: var(--vv-text) !important;
+}
+.card-header {
+    border-bottom-color: var(--vv-border) !important;
+}
+
+.card-title,
+.card-subtitle {
+    color: var(--vv-text) !important;
+}
+
+/* ---- Info boxes (AdminLTE stat widgets) ---- */
+.info-box {
+    background: var(--vv-bg-surface) !important;
+    border-color: var(--vv-border) !important;
+    box-shadow: none !important;
+}
+.info-box .info-box-text,
+.info-box .info-box-number {
+    color: var(--vv-text) !important;
+}
+.info-box .progress {
+    background-color: var(--vv-border) !important;
+}
+
+/* ---- Small boxes (dashboard stats) ---- */
+.small-box {
+    background: var(--vv-bg-surface) !important;
+    border-radius: 10px;
+    box-shadow: none !important;
+}
+.small-box h3,
+.small-box p {
+    color: var(--vv-text) !important;
+}
+.small-box .icon i {
+    color: rgba(0, 212, 255, 0.15) !important;
+}
+.small-box .small-box-footer {
+    background: var(--vv-bg-raised) !important;
+    color: var(--vv-text-muted) !important;
+    border-top: 1px solid var(--vv-border) !important;
+}
+.small-box .small-box-footer:hover {
+    color: var(--vv-accent) !important;
+    background: var(--vv-accent-subtle) !important;
+}
+
+/* ---- Tables ---- */
+.table,
+.table > :not(caption) > * > * {
+    background-color: var(--vv-bg-surface) !important;
+    border-color: var(--vv-border) !important;
+    color: var(--vv-text) !important;
+}
+
+.table thead th,
+.table thead td {
+    background-color: var(--vv-bg-deep) !important;
+    color: var(--vv-text-muted) !important;
+    border-bottom-color: var(--vv-border) !important;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+}
+
+.table-hover > tbody > tr:hover > *,
+.table-striped > tbody > tr:nth-of-type(odd) > * {
+    background-color: var(--vv-bg-raised) !important;
+}
+
+.table .action-checkbox {
+    background-color: var(--vv-bg-surface) !important;
+}
+
+/* ---- Changelist filter sidebar ---- */
+#changelist-filter {
+    background: var(--vv-bg-surface) !important;
+    border-color: var(--vv-border) !important;
+}
+#changelist-filter h2,
+#changelist-filter h3 {
+    color: var(--vv-text) !important;
+    border-bottom-color: var(--vv-border) !important;
+}
+#changelist-filter a {
+    color: var(--vv-text-muted) !important;
+}
+#changelist-filter a:hover {
+    color: var(--vv-accent) !important;
+}
+#changelist-filter li.selected a {
+    color: var(--vv-accent) !important;
+    font-weight: 600;
+}
+
+/* ---- Forms: inputs, selects, textareas ---- */
+.form-control,
+.form-select,
+select,
+textarea {
+    background-color: var(--vv-bg-surface) !important;
+    border-color: var(--vv-border) !important;
+    color: var(--vv-text) !important;
+}
+
+.form-control:focus,
+.form-select:focus,
+select:focus,
+textarea:focus,
+input:focus {
+    border-color: var(--vv-accent) !important;
+    box-shadow: 0 0 0 2px var(--vv-accent-glow) !important;
+}
+
+.form-control::placeholder {
+    color: var(--vv-text-muted) !important;
+}
+
+.form-control:disabled,
+.form-control[readonly] {
+    background-color: var(--vv-bg-deep) !important;
+    color: var(--vv-text-muted) !important;
+}
+
+/* Input-group addons / help text */
+.input-group-text {
+    background-color: var(--vv-bg-raised) !important;
+    border-color: var(--vv-border) !important;
+    color: var(--vv-text-muted) !important;
+}
+
+.help-block,
+.form-text,
+.text-muted {
+    color: var(--vv-text-muted) !important;
+}
+
+/* Django admin fieldset / row labels */
+.form-row label,
+.inline-group .tabular td label {
+    color: var(--vv-text) !important;
+}
+
+/* ---- Buttons ---- */
+.btn-primary {
+    background: linear-gradient(135deg, var(--vv-accent), var(--vv-neon-purple)) !important;
+    border: none !important;
+    color: #fff !important;
+    box-shadow: 0 4px 15px rgba(0, 212, 255, 0.2);
+}
+.btn-primary:hover {
+    box-shadow: 0 6px 20px rgba(0, 212, 255, 0.35) !important;
+    filter: brightness(1.1);
+}
+
+.btn-secondary {
+    background-color: var(--vv-bg-raised) !important;
+    border-color: var(--vv-border) !important;
+    color: var(--vv-text-muted) !important;
+}
+.btn-secondary:hover {
+    background-color: var(--vv-bg-surface) !important;
+    color: var(--vv-text) !important;
+}
+
+.btn-outline-primary {
+    border-color: var(--vv-accent) !important;
+    color: var(--vv-accent) !important;
+    background: transparent !important;
+}
+.btn-outline-primary:hover {
+    background: var(--vv-accent-subtle) !important;
+}
+
+.btn-default,
+.btn-outline-secondary {
+    background-color: var(--vv-bg-raised) !important;
+    border-color: var(--vv-border) !important;
+    color: var(--vv-text-muted) !important;
+}
+
+.btn-danger {
+    background-color: #ff1744 !important;
+    border: none !important;
+}
+
+.btn-warning {
+    background-color: #ffab00 !important;
+    color: #000 !important;
+    border: none !important;
+}
+
+.btn-success {
+    background-color: #00e676 !important;
+    color: #000 !important;
+    border: none !important;
+}
+
+.btn-info {
+    background-color: var(--vv-accent) !important;
+    color: #000 !important;
+    border: none !important;
+}
+
+/* ---- Modals ---- */
+.modal-content {
+    background-color: var(--vv-bg-surface) !important;
+    border-color: var(--vv-border) !important;
+    color: var(--vv-text) !important;
+}
+.modal-header {
+    border-bottom-color: var(--vv-border) !important;
+}
+.modal-footer {
+    border-top-color: var(--vv-border) !important;
+}
+
+/* ---- Dropdown menus ---- */
+.dropdown-menu {
+    background-color: var(--vv-bg-surface) !important;
+    border-color: var(--vv-border) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5) !important;
+}
+.dropdown-item {
+    color: var(--vv-text-muted) !important;
+}
+.dropdown-item:hover,
+.dropdown-item:focus {
+    background-color: var(--vv-accent-subtle) !important;
+    color: var(--vv-accent) !important;
+}
+.dropdown-divider {
+    border-color: var(--vv-border) !important;
+}
+
+/* ---- Breadcrumbs ---- */
+.breadcrumb {
+    background: var(--vv-bg-surface) !important;
+    border-color: var(--vv-border) !important;
+}
+.breadcrumb-item a {
+    color: var(--vv-accent) !important;
+}
+.breadcrumb-item.active {
+    color: var(--vv-text-muted) !important;
+}
+
+/* ---- Pagination ---- */
+.pagination .page-link {
+    background-color: var(--vv-bg-surface) !important;
+    border-color: var(--vv-border) !important;
+    color: var(--vv-text-muted) !important;
+}
+.pagination .page-item.active .page-link {
+    background-color: var(--vv-accent) !important;
+    border-color: var(--vv-accent) !important;
+    color: #000 !important;
+}
+.pagination .page-link:hover {
+    background-color: var(--vv-bg-raised) !important;
+    color: var(--vv-accent) !important;
+}
+
+/* ---- Alerts / Messages ---- */
+.alert {
+    background-color: var(--vv-bg-raised) !important;
+    border-color: var(--vv-border) !important;
+    color: var(--vv-text) !important;
+}
+.alert-success { border-left-color: #00e676 !important; }
+.alert-danger  { border-left-color: #ff1744 !important; }
+.alert-warning { border-left-color: #ffab00 !important; }
+.alert-info    { border-left-color: var(--vv-accent) !important; }
+
+/* ---- Footer ---- */
+.main-footer {
+    background: var(--vv-bg-deep) !important;
+    border-top-color: var(--vv-border) !important;
+    color: var(--vv-text-muted) !important;
+}
+
+/* ---- Login page ---- */
+.login-page,
+.login-box,
+.login-card-body {
+    background-color: var(--vv-bg-deepest) !important;
+}
+.login-box-msg {
+    color: var(--vv-text) !important;
+}
+
+/* ---- Login logo sizing ---- */
+.login-logo img {
+    max-width: 120px;
+    height: auto;
+    object-fit: contain;
+}
+
+/* ---- Object-tools (Add, History buttons above changelist) ---- */
+.object-tools a.addlink,
+.object-tools a.changelink,
+.object-tools a {
+    background-color: var(--vv-bg-raised) !important;
+    color: var(--vv-text-muted) !important;
+}
+.object-tools a:hover {
+    background-color: var(--vv-accent-subtle) !important;
+    color: var(--vv-accent) !important;
+}
+
+/* ---- Inline groups / stacked / tabular ---- */
+.inline-group,
+.module {
+    background-color: var(--vv-bg-surface) !important;
+    border-color: var(--vv-border) !important;
+}
+.module h2,
+.module caption,
+.inline-group h2 {
+    background-color: var(--vv-bg-deep) !important;
+    color: var(--vv-text) !important;
+    border-bottom-color: var(--vv-border) !important;
+}
+
+.tabular.inline-related tbody td {
+    background-color: var(--vv-bg-surface) !important;
+    border-color: var(--vv-border) !important;
+}
+
+/* ---- Related widget (ForeignKey / ManyToMany popups) ---- */
+.related-widget-wrapper-link {
+    color: var(--vv-accent) !important;
+}
+
+/* ---- Scrollbar (admin area) ---- */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+::-webkit-scrollbar-track {
+    background: var(--vv-bg-deepest);
+}
+::-webkit-scrollbar-thumb {
+    background: #353550;
+    border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--vv-text-muted);
+}
+
+/* ---- Selection ---- */
+::selection {
+    background: var(--vv-accent-glow);
+    color: var(--vv-text);
+}
+
+/* ---- Full-width content wrapper fix ---- */
+.content-wrapper,
+.content-wrapper > .content {
+    background-color: var(--vv-bg-deepest) !important;
+}
+
+/* ---- Nav-tabs (e.g. changeform horizontal tabs) ---- */
+.nav-tabs {
+    border-bottom-color: var(--vv-border) !important;
+}
+.nav-tabs .nav-link {
+    color: var(--vv-text-muted) !important;
+    border-color: transparent !important;
+}
+.nav-tabs .nav-link:hover {
+    color: var(--vv-text) !important;
+    border-color: var(--vv-border) !important;
+    background-color: rgba(255, 255, 255, 0.03) !important;
+}
+.nav-tabs .nav-link.active {
+    background-color: var(--vv-bg-surface) !important;
+    border-color: var(--vv-border) !important;
+    border-bottom-color: var(--vv-bg-surface) !important;
+    color: var(--vv-accent) !important;
+}
+
+/* ---- Accordion (collapsible changeform) ---- */
+.accordion-item {
+    background-color: var(--vv-bg-surface) !important;
+    border-color: var(--vv-border) !important;
+}
+.accordion-button {
+    background-color: var(--vv-bg-surface) !important;
+    color: var(--vv-text) !important;
+    box-shadow: none !important;
+}
+.accordion-button:not(.collapsed) {
+    background-color: var(--vv-accent-subtle) !important;
+    color: var(--vv-accent) !important;
+}
+.accordion-button::after {
+    color: var(--vv-text-muted) !important;
+}
+.accordion-body {
+    background-color: var(--vv-bg-surface) !important;
+}
+
+/* ---- Timestamp / date-hierarchy links ---- */
+#changelist .actions,
+#changelist .paginator {
+    background-color: var(--vv-bg-surface) !important;
+    color: var(--vv-text-muted) !important;
+    border-color: var(--vv-border) !important;
+}
+#changelist .paginator a {
+    color: var(--vv-accent) !important;
+}
+
+ul.timelist li a,
+ul.timelist li span {
+    color: var(--vv-text) !important;
+}
+
+/* ---- Date hierarchy ---- */
+#changelist .xfull {
+    background-color: var(--vv-bg-surface) !important;
+    border-color: var(--vv-border) !important;
+}
+
+/* ---- Calendar / date/time widgets ---- */
+.calendarbox,
+.clockbox {
+    background-color: var(--vv-bg-surface) !important;
+    border-color: var(--vv-border) !important;
+}
+.calendar td,
+.calendar th {
+    color: var(--vv-text) !important;
+}
+
+/* ---- Select2 widgets (used by Jazzmin) ---- */
+.select2-container--default .select2-selection--single,
+.select2-container--default .select2-selection--multiple {
+    background-color: var(--vv-bg-surface) !important;
+    border-color: var(--vv-border) !important;
+    color: var(--vv-text) !important;
+}
+.select2-container--default .select2-results__option {
+    background-color: var(--vv-bg-surface) !important;
+    color: var(--vv-text) !important;
+}
+.select2-container--default .select2-results__option--highlighted {
+    background-color: var(--vv-accent-subtle) !important;
+    color: var(--vv-accent) !important;
+}
+.select2-dropdown {
+    background-color: var(--vv-bg-surface) !important;
+    border-color: var(--vv-border) !important;
+}
+.select2-search--dropdown .select2-search__field {
+    background-color: var(--vv-bg-raised) !important;
+    border-color: var(--vv-border) !important;
+    color: var(--vv-text) !important;
+}
+
+/* ---- Delete confirmation page ---- */
+.deletelink-box a,
+a.deletelink {
+    background-color: #ff1744 !important;
+    color: #fff !important;
+}
+
+/* ---- Jazzmin user avatar dropdown ---- */
+.user-panel .image img {
+    border-radius: 50%;
+}
+
+/* ---- Generic links in content ---- */
+#content a,
+.fieldset a {
+    color: var(--vv-accent) !important;
+}
+#content a:hover,
+.fieldset a:hover {
+    color: var(--vv-accent-hover) !important;
+}
+
+/* ---- Responsive tweaks ---- */
+@media (max-width: 768px) {
+    .main-header.navbar {
+        background: var(--vv-bg-deep) !important;
+    }
+}

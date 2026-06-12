@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% load genre_tags %}
+
+{% block title %}{{ genre.name }} - ViewVision{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="page-header">
+        <h1><i class="{{ genre.slug|genre_icon }}"></i> {{ genre.name }}</h1>
+        {% if genre.description %}
+        <p>{{ genre.description }}</p>
+        {% endif %}
+    </div>
+
+    {% if movies %}
+    <div class="section">
+        <div class="section-header">
+            <h2 class="section-title">
+                <i class="fas fa-film"></i> فیلم‌ها ({{ movies.paginator.count }})
+            </h2>
+        </div>
+        <div class="media-grid">
+            {% for movie in movies %}
+            <a href="{{ movie.get_absolute_url }}" class="media-card">
+                <div class="media-card-poster">
+                    {% if movie.get_poster_url %}
+                    <img src="{{ movie.get_poster_url }}" alt="{{ movie.title }}">
+                    {% else %}
+                    <div class="poster-placeholder">
+                        <i class="fas fa-film"></i>
+                    </div>
+                    {% endif %}
+                    <div class="media-card-overlay">
+                        <div class="overlay-actions">
+                            <span class="btn btn-primary btn-sm">
+                                <i class="fas fa-play"></i> جزئیات
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="media-card-info">
+                    <div class="media-card-title">{{ movie.title }}</div>
+                    <div class="media-card-meta">
+                        <span class="media-card-rating">
+                            <i class="fas fa-star"></i> {{ movie.rating }}
+                        </span>
+                        <span class="media-card-year">{{ movie.release_date|date:"Y" }}</span>
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    {% include 'includes/_pagination.html' with page_obj=movies_page_obj page_param='movies_page' query_params='' %}
+
+    {% if series %}
+    <div class="section">
+        <div class="section-header">
+            <h2 class="section-title">
+                <i class="fas fa-tv"></i> سریال‌ها ({{ series.paginator.count }})
+            </h2>
+        </div>
+        <div class="media-grid">
+            {% for s in series %}
+            <a href="{{ s.get_absolute_url }}" class="media-card">
+                <div class="media-card-poster">
+                    {% if s.get_poster_url %}
+                    <img src="{{ s.get_poster_url }}" alt="{{ s.title }}">
+                    {% else %}
+                    <div class="poster-placeholder">
+                        <i class="fas fa-tv"></i>
+                    </div>
+                    {% endif %}
+                    <div class="media-card-overlay">
+                        <div class="overlay-actions">
+                            <span class="btn btn-primary btn-sm">
+                                <i class="fas fa-play"></i> جزئیات
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="media-card-info">
+                    <div class="media-card-title">{{ s.title }}</div>
+                    <div class="media-card-meta">
+                        <span class="media-card-rating">
+                            <i class="fas fa-star"></i> {{ s.rating }}
+                        </span>
+                        <span class="media-card-year">{{ s.release_date|date:"Y" }}</span>
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    {% include 'includes/_pagination.html' with page_obj=series_page_obj page_param='series_page' query_params='' %}
+
+    {% if not movies and not series %}
+    <div class="empty-state">
+        <div class="empty-state-icon"><i class="fas fa-theater-masks"></i></div>
+        <h3>محتوایی در این ژانر وجود ندارد</h3>
+        <p>هنوز فیلم یا سریالی در این ژانر ثبت نشده است.</p>
+        <a href="{% url 'genre_list' %}" class="btn btn-outline">بازگشت به ژانرها</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

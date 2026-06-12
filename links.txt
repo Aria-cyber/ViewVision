@@ -1,0 +1,4 @@
+instagram=https://www.instagram.com/xp.aizen?igsh=MXhmZjNxN2liNmNrOQ==
+telegram=https://t.me/XpAizen
+linkedin=http://www.linkedin.com/in/shayan-fatahi-61792835b
+github=https://github.com/Aria-cyber

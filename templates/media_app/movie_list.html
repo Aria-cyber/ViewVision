@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block title %}فیلم‌ها - ViewVision{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="page-header">
+        <h1><i class="fas fa-film"></i> فیلم‌ها</h1>
+        <p>مجموعه‌ای از بهترین فیلم‌ها</p>
+    </div>
+
+    <!-- Filter Bar -->
+    <div class="filter-bar">
+        <div class="filter-chips">
+            <a href="{% url 'movies:movie_list' %}" class="filter-chip {% if not current_genre %}active{% endif %}">
+                همه
+            </a>
+            {% for genre in genres %}
+            <a href="{% url 'movies:movie_list' %}?genre={{ genre.slug }}&sort={{ current_sort }}"
+               class="filter-chip {% if current_genre == genre.slug %}active{% endif %}">
+                {{ genre.name }}
+            </a>
+            {% endfor %}
+        </div>
+        <form method="GET" style="display:flex;gap:8px;align-items:center;">
+            {% if current_genre %}
+            <input type="hidden" name="genre" value="{{ current_genre }}">
+            {% endif %}
+            <select name="sort" class="sort-select" onchange="this.form.submit()">
+                <option value="-created_at" {% if current_sort == '-created_at' %}selected{% endif %}>جدیدترین</option>
+                <option value="rating" {% if current_sort == 'rating' %}selected{% endif %}>بیشترین امتیاز</option>
+                <option value="-rating" {% if current_sort == '-rating' %}selected{% endif %}>کمترین امتیاز</option>
+                <option value="title" {% if current_sort == 'title' %}selected{% endif %}>نام (الف-ی)</option>
+                <option value="-title" {% if current_sort == '-title' %}selected{% endif %}>نام (ی-الف)</option>
+                <option value="-release_date" {% if current_sort == '-release_date' %}selected{% endif %}>تاریخ انتشار</option>
+            </select>
+        </form>
+    </div>
+
+    {% if movies %}
+    <div class="media-grid">
+        {% for movie in movies %}
+
+        <a href="{{ movie.get_absolute_url }}" class="media-card">
+            <div class="media-card-poster">
+                {% if movie.get_poster_url %}
+                <img src="{{ movie.get_poster_url }}" alt="{{ movie.title }}">
+                {% else %}
+                <div class="poster-placeholder">
+                    <i class="fas fa-film"></i>
+                </div>
+                {% endif %}
+                <div class="media-card-overlay">
+                    <div class="overlay-actions">
+                        <span class="btn btn-primary btn-sm">
+                            <i class="fas fa-play"></i> جزئیات
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="media-card-info">
+                <div class="media-card-title">{{ movie.title }}</div>
+                <div class="media-card-meta">
+                    <span class="media-card-rating">
+                        <i class="fas fa-star"></i> {{ movie.rating }}
+                    </span>
+                    <span class="media-card-year">{{ movie.release_date|date:"Y" }}</span>
+                </div>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state">
+        <div class="empty-state-icon"><i class="fas fa-film"></i></div>
+        <h3>فیلمی یافت نشد</h3>
+        <p>در این دسته‌بندی فیلمی وجود ندارد.</p>
+        <a href="{% url 'movies:movie_list' %}" class="btn btn-outline">مشاهده همه فیلم‌ها</a>
+    </div>
+    {% endif %}
+
+    {% include 'includes/_pagination.html' with page_obj=page_obj query_params=query_params %}
+</div>
+{% endblock %}

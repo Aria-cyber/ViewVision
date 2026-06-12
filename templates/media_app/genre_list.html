@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load genre_tags %}
+
+{% block title %}ژانرها - ViewVision{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="page-header">
+        <h1><i class="fas fa-tags"></i> ژانرها</h1>
+        <p>بر اساس ژانر مورد علاقه خود مرور کنید</p>
+    </div>
+
+    {% if genres %}
+    <div class="genre-grid">
+        {% for genre in genres %}
+        <a href="{{ genre.get_absolute_url }}" class="genre-card">
+            <div class="genre-card-icon">
+                <i class="{{ genre.slug|genre_icon }}"></i>
+            </div>
+            <h3>{{ genre.name }}</h3>
+            <p>{{ genre.description|truncatewords:10|default:"کشف کنید" }}</p>
+        </a>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state">
+        <div class="empty-state-icon"><i class="fas fa-tags"></i></div>
+        <h3>ژانری وجود ندارد</h3>
+        <p>هنوز ژانری تعریف نشده است.</p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

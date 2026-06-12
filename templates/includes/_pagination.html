@@ -1,0 +1,49 @@
+{% if page_obj.has_other_pages %}
+{% with pg=page_param|default:"page" %}
+<nav class="pagination-nav" aria-label="ناوبری صفحات">
+    <div class="pagination">
+        {% if page_obj.has_previous %}
+        <a href="?{{ pg }}=1{% if query_params %}&{{ query_params }}{% endif %}" class="pagination-btn pagination-first" title="صفحه اول">
+            <i class="fas fa-angle-double-right"></i>
+        </a>
+        <a href="?{{ pg }}={{ page_obj.previous_page_number }}{% if query_params %}&{{ query_params }}{% endif %}" class="pagination-btn pagination-prev" title="صفحه قبل">
+            <i class="fas fa-angle-right"></i>
+        </a>
+        {% else %}
+        <span class="pagination-btn pagination-first pagination-disabled">
+            <i class="fas fa-angle-double-right"></i>
+        </span>
+        <span class="pagination-btn pagination-prev pagination-disabled">
+            <i class="fas fa-angle-right"></i>
+        </span>
+        {% endif %}
+
+        {% for num in page_obj.paginator.get_elided_page_range %}
+            {% if num == page_obj.paginator.ELLIPSIS %}
+                <span class="pagination-ellipsis">&hellip;</span>
+            {% elif num == page_obj.number %}
+                <span class="pagination-btn pagination-current">{{ num }}</span>
+            {% else %}
+                <a href="?{{ pg }}={{ num }}{% if query_params %}&{{ query_params }}{% endif %}" class="pagination-btn">{{ num }}</a>
+            {% endif %}
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+        <a href="?{{ pg }}={{ page_obj.next_page_number }}{% if query_params %}&{{ query_params }}{% endif %}" class="pagination-btn pagination-next" title="صفحه بعد">
+            <i class="fas fa-angle-left"></i>
+        </a>
+        <a href="?{{ pg }}={{ page_obj.paginator.num_pages }}{% if query_params %}&{{ query_params }}{% endif %}" class="pagination-btn pagination-last" title="صفحه آخر">
+            <i class="fas fa-angle-double-left"></i>
+        </a>
+        {% else %}
+        <span class="pagination-btn pagination-next pagination-disabled">
+            <i class="fas fa-angle-left"></i>
+        </span>
+        <span class="pagination-btn pagination-last pagination-disabled">
+            <i class="fas fa-angle-double-left"></i>
+        </span>
+        {% endif %}
+    </div>
+</nav>
+{% endwith %}
+{% endif %}

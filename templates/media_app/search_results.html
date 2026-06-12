@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+
+{% block title %}جستجو: {{ query }} - ViewVision{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="search-header">
+        <h1>نتایج جستجو برای «<span class="search-query">{{ query }}</span>»</h1>
+        <p class="text-muted">{{ total_movies }} فیلم و {{ total_series }} سریال یافت شد</p>
+    </div>
+
+    {% if movies %}
+    <div class="section">
+        <div class="section-header">
+            <h2 class="section-title">
+                <i class="fas fa-film"></i> فیلم‌ها ({{ total_movies }})
+            </h2>
+        </div>
+        <div class="media-grid">
+            {% for movie in movies %}
+            <a href="{{ movie.get_absolute_url }}" class="media-card">
+                <div class="media-card-poster">
+                    {% if movie.get_poster_url %}
+                    <img src="{{ movie.get_poster_url }}" alt="{{ movie.title }}">
+                    {% else %}
+                    <div class="poster-placeholder">
+                        <i class="fas fa-film"></i>
+                    </div>
+                    {% endif %}
+                    <div class="media-card-overlay">
+                        <div class="overlay-actions">
+                            <span class="btn btn-primary btn-sm">
+                                <i class="fas fa-play"></i> جزئیات
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="media-card-info">
+                    <div class="media-card-title">{{ movie.title }}</div>
+                    <div class="media-card-meta">
+                        <span class="media-card-rating">
+                            <i class="fas fa-star"></i> {{ movie.rating }}
+                        </span>
+                        <span class="media-card-year">{{ movie.release_date|date:"Y" }}</span>
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    {% if series %}
+    <div class="section">
+        <div class="section-header">
+            <h2 class="section-title">
+                <i class="fas fa-tv"></i> سریال‌ها ({{ total_series }})
+            </h2>
+        </div>
+        <div class="media-grid">
+            {% for s in series %}
+            <a href="{{ s.get_absolute_url }}" class="media-card">
+                <div class="media-card-poster">
+                    {% if s.get_poster_url %}
+                    <img src="{{ s.get_poster_url }}" alt="{{ s.title }}">
+                    {% else %}
+                    <div class="poster-placeholder">
+                        <i class="fas fa-tv"></i>
+                    </div>
+                    {% endif %}
+                    <div class="media-card-overlay">
+                        <div class="overlay-actions">
+                            <span class="btn btn-primary btn-sm">
+                                <i class="fas fa-play"></i> جزئیات
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="media-card-info">
+                    <div class="media-card-title">{{ s.title }}</div>
+                    <div class="media-card-meta">
+                        <span class="media-card-rating">
+                            <i class="fas fa-star"></i> {{ s.rating }}
+                        </span>
+                        <span class="media-card-year">{{ s.release_date|date:"Y" }}</span>
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    {% if movies_page_obj.has_other_pages or series_page_obj.has_other_pages %}
+    <div class="search-pagination">
+        {% if movies_page_obj.has_other_pages %}
+        <div class="search-pagination-section">
+            <h4>صفحه‌بندی فیلم‌ها</h4>
+            {% include 'includes/_pagination.html' with page_obj=movies_page_obj page_param='movies_page' query_params=query_params %}
+        </div>
+        {% endif %}
+        {% if series_page_obj.has_other_pages %}
+        <div class="search-pagination-section">
+            <h4>صفحه‌بندی سریال‌ها</h4>
+            {% include 'includes/_pagination.html' with page_obj=series_page_obj page_param='series_page' query_params=query_params %}
+        </div>
+        {% endif %}
+    </div>
+    {% endif %}
+
+    {% if not movies and not series %}
+    <div class="empty-state">
+        <div class="empty-state-icon"><i class="fas fa-search"></i></div>
+        <h3>نتیجه‌ای یافت نشد</h3>
+        <p>عبارت دیگری را جستجو کنید.</p>
+        <a href="{% url 'home' %}" class="btn btn-outline">
+            <i class="fas fa-home"></i> بازگشت به خانه
+        </a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

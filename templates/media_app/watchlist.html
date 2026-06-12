@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block title %}لیست تماشا - ViewVision{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="page-header">
+        <h1><i class="fas fa-bookmark"></i> لیست تماشای من</h1>
+        <p>فیلم‌ها و سریال‌های ذخیره شده شما</p>
+    </div>
+
+    {% if items %}
+    <div class="watchlist-grid">
+        {% for item in items %}
+        {% if item.movie %}
+        <div class="watchlist-item">
+            <div class="watchlist-item-poster">
+                {% if item.movie.get_poster_url %}
+                <img src="{{ item.movie.get_poster_url }}" alt="{{ item.movie.title }}">
+                {% else %}
+                <div class="poster-placeholder" style="height:100%;"><i class="fas fa-film"></i></div>
+                {% endif %}
+            </div>
+            <div class="watchlist-item-info">
+                <div>
+                    <div class="watchlist-item-title">{{ item.movie.title }}</div>
+                    <div class="watchlist-item-meta">
+                        <i class="fas fa-star" style="color:var(--warning);"></i> {{ item.movie.rating }}
+                        &bull; {{ item.movie.release_date|date:"Y" }}
+                        &bull; <span style="color:var(--accent);">فیلم</span>
+                    </div>
+                </div>
+                <div class="watchlist-item-actions">
+                    <a href="{{ item.movie.get_absolute_url }}" class="btn btn-outline btn-sm">
+                        <i class="fas fa-eye"></i> مشاهده
+                    </a>
+                    <a href="{% url 'toggle_watchlist' 'movie' item.movie.pk %}" class="btn btn-ghost btn-sm" style="color:var(--danger);">
+                        <i class="fas fa-trash"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% elif item.series %}
+        <div class="watchlist-item">
+            <div class="watchlist-item-poster">
+                {% if item.series.get_poster_url %}
+                <img src="{{ item.series.get_poster_url }}" alt="{{ item.series.title }}">
+                {% else %}
+                <div class="poster-placeholder" style="height:100%;"><i class="fas fa-tv"></i></div>
+                {% endif %}
+            </div>
+            <div class="watchlist-item-info">
+                <div>
+                    <div class="watchlist-item-title">{{ item.series.title }}</div>
+                    <div class="watchlist-item-meta">
+                        <i class="fas fa-star" style="color:var(--warning);"></i> {{ item.series.rating }}
+                        &bull; {{ item.series.release_date|date:"Y" }}
+                        &bull; <span style="color:var(--neon-purple);">سریال</span>
+                    </div>
+                </div>
+                <div class="watchlist-item-actions">
+                    <a href="{{ item.series.get_absolute_url }}" class="btn btn-outline btn-sm">
+                        <i class="fas fa-eye"></i> مشاهده
+                    </a>
+                    <a href="{% url 'toggle_watchlist' 'series' item.series.pk %}" class="btn btn-ghost btn-sm" style="color:var(--danger);">
+                        <i class="fas fa-trash"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state">
+        <div class="empty-state-icon"><i class="fas fa-bookmark"></i></div>
+        <h3>لیست تماشای شما خالی است</h3>
+        <p>فیلم‌ها و سریال‌های مورد علاقه خود را اینجا ذخیره کنید.</p>
+        <div style="display:flex;gap:var(--space-md);justify-content:center;flex-wrap:wrap;">
+            <a href="{% url 'movies:movie_list' %}" class="btn btn-primary">
+                <i class="fas fa-film"></i> فیلم‌ها
+            </a>
+            <a href="{% url 'series:series_list' %}" class="btn btn-outline">
+                <i class="fas fa-tv"></i> سریال‌ها
+            </a>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
