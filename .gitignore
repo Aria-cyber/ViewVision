@@ -4,8 +4,16 @@ __pycache__/
 *.pyd
 
 venv/
+.venv/
 .env
+.env.local
 .idea/
+.vscode/
+*.swp
+
 staticfiles/
+db.sqlite3
+media/
 
 .DS_Store
+*.log
