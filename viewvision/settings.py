@@ -9,13 +9,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECRET_KEY = 'django-insecure-2v0_te-)2%kc6*hoi$_v+0_@o9u(_!em4f8^2kjs$33zn%6xle'
 
-SECRET_KEY = 'eduJX7u1_zcvx_Pax5Or'
-
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 DEBUG = False
 
 # ALLOWED_HOSTS = ['*']
-ALLOWED_HOSTS = ["abrhapaas.com", "view-vision.apps.teh2.abrhapaas.com" ]
+ALLOWED_HOSTS = ["abrhapaas.com", "view-vision.apps.teh2.abrhapaas.com" , "*" , "0.0.0.0"]
 
 INSTALLED_APPS = [
     "jazzmin",
